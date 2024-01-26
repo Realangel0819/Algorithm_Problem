@@ -1,32 +1,37 @@
-// Authored by : OceanShape
-// Co-authored by : -
-// http://boj.kr/da61fda65b7d4d7c96fde827da8d1834
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
+int boy[6];
+int girl[6];
+int main(){
+    int n,k;
+    int s,y;
+    cin >> n >> k;
 
-int N, K, ans=0;
-int s[2][7]={};  // 성별/반별 학생 수를 저장하는 배열
+    int cnt = 0;
 
-int main(void){
-  ios::sync_with_stdio(0);
-  cin.tie(0);
-
-  cin >> N >> K;
-  // 학생 수 저장
-  for (int i=0; i<N; ++i) {
-    int a, b;
-    cin >> a >> b;
-    s[a][b]++;
-  }
-
-  // 필요한 방의 개수 계산
-  for (int i=0; i<2; ++i) {
-    for (int j=1; j<7; ++j) {
-      // 배정에 필요한 만큼 방의 개수 추가
-      ans += s[i][j] / K;
-      // 학생이 남을 경우, 하나의 방이 더 필요하므로 방의 개수 추가
-      if (s[i][j] % K) ++ans;
+    for (int i = 0; i < n ; i++){
+        cin >> s >> y;
+        if(s == 0)
+            girl[y-1]++;
+        else
+            boy[y-1]++;
     }
-  }
-  cout << ans;
+    for(int i = 0; i < 6; i++ ){
+        if(girl[i]%k==0){
+            cnt = girl[i]/k + cnt;
+        }
+        else{
+            cnt = girl[i]/k + 1 + cnt;
+        }
+
+        if(boy[i]%k==0){
+            cnt = boy[i]/k + cnt;
+        }
+        else{
+            cnt = boy[i]/k + 1 + cnt;
+        }
+    }
+    cout << cnt;
+    return 0;
+
 }
