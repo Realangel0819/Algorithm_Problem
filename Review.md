@@ -7,6 +7,7 @@
   <li><h3>Stack</h3></li>
   <ul>
     <li><a href="https://www.acmicpc.net/problem/1874">1874. 스택수열</a></li>
+    <li><a href="https://www.acmicpc.net/problem/2493">2493. 탑</a></li>
   </ul>
 </ol>
 
