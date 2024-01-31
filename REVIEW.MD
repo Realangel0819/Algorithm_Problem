@@ -8,6 +8,7 @@
   <ul>
     <li><a href="https://www.acmicpc.net/problem/1874">1874. 스택수열</a></li>
     <li><a href="https://www.acmicpc.net/problem/2493">2493. 탑</a></li>
+    <li><a href="https://www.acmicpc.net/problem/6198">6198. 옥상정원 꾸미기</a></li>
   </ul>
 </ol>
 
