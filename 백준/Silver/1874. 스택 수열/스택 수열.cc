@@ -1,28 +1,28 @@
 #include<bits/stdc++.h>
 using namespace std;
+
 int main(){
-    int n;
-    stack<int>s;
-    int temp;
-    int q=1;
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);
+    stack <int> s;
     string ans;
-    cin >> n;
-    for (int i = 0; i < n ; i++ ){
-        cin >> temp;
-        while(q<=temp){
+    int q=1;
+    int n, k;
+    cin >>n;
+    for(int i=0;i<n;i++){
+        cin >> k;
+        while(q<=k){
             s.push(q++);
-            ans+= "+\n";
+            ans+="+\n";
         }
-        if(s.top()==temp){
+        if(s.top()==k){
             s.pop();
-            ans+= "-\n";
+            ans+="-\n";
         }
-        else {
+        else{
             cout << "NO";
             return 0;
         }
     }
-
-    cout << ans;
-    return 0;
+    for(auto w:ans) cout<<w;
 }
