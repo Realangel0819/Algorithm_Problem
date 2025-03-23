@@ -1,37 +1,33 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-int boy[6];
-int girl[6];
-int main(){
-    int n,k;
-    int s,y;
-    cin >> n >> k;
 
-    int cnt = 0;
+int stu[2][6];
 
-    for (int i = 0; i < n ; i++){
-        cin >> s >> y;
-        if(s == 0)
-            girl[y-1]++;
-        else
-            boy[y-1]++;
-    }
-    for(int i = 0; i < 6; i++ ){
-        if(girl[i]%k==0){
-            cnt = girl[i]/k + cnt;
-        }
-        else{
-            cnt = girl[i]/k + 1 + cnt;
-        }
-
-        if(boy[i]%k==0){
-            cnt = boy[i]/k + cnt;
-        }
-        else{
-            cnt = boy[i]/k + 1 + cnt;
-        }
-    }
-    cout << cnt;
-    return 0;
-
+int main(void) {
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	
+	int n, k;
+	cin >> n >> k;
+	
+	while (n--) {
+		int s, y;
+		cin >> s >> y;
+		stu[s][y - 1]++;
+	}
+	
+	int ans = 0;
+	for (int i = 0; i < 2; i++) {
+		for (int j = 0; j < 6; j++) {
+			ans += stu[i][j] / k; // 나눈 몫 = 방의 개수
+			
+			if (stu[i][j] % k != 0) {
+				ans++; // 나머지 학생들이 있을 경우 방의 개수 +1
+			}
+		}
+	}
+	
+	cout << ans;
+	
+	return 0;
 }
