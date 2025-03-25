@@ -1,36 +1,41 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+int n;
+
 int main() {
-  ios::sync_with_stdio(0);
-  cin.tie(0);
-  int n;
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    
+    cin >> n;
+    while (n--) {
+        list<char> L;
+        auto cur = L.begin();
+        string s;
+        cin >> s;
 
-  cin >> n;
-
-  for (int i = 0; i < n; i++) {
-    list<char> L = {};
-    string s;
-    auto p = L.begin();
-
-    cin >> s;
-    for (auto c : s) {
-      if (c == '<') {
-        if (p != L.begin()) p--;
-      }
-      else if (c == '>') {
-        if (p != L.end()) p++;
-      }
-      else if (c == '-') {
-        if (p != L.begin()) {
-          p--;
-          p = L.erase(p);
+        for (auto c : s) {
+            if (c == '<') {
+                if (cur != L.begin()) cur--;
+            } 
+            else if (c == '>') {
+                if (cur != L.end()) cur++;
+            } 
+            else if (c == '-') {
+                if (cur != L.begin()) {
+                    cur = L.erase(prev(cur));
+                }
+            } 
+            else {
+                L.insert(cur, c);
+            }
         }
-      }
-      else
-        L.insert(p, c);      
+
+        // 문자열을 한 번에 출력
+        ostringstream oss;
+        for (auto c : L) {
+            oss << c;
+        }
+        cout << oss.str() << "\n";
     }
-    for (auto c : L) cout << c;
-    cout << '\n';
-  }
 }
