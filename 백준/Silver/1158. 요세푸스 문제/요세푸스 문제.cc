@@ -1,45 +1,40 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
 
-int n, k;
+int N, K, len=0;
+int pre[5001], nxt[5001];
+vector<int>v;
 
-int main() {
+int main(void){
     ios::sync_with_stdio(0);
     cin.tie(0);
+    cin >> N >> K;
 
-    cin >> n >> k;
-    list<int> l;
-    vector<int> ans;
-
-    // 1부터 n까지 리스트에 추가
-    for (int i = 1; i <= n; i++) {
-        l.push_back(i);
+    for (int i = 1; i<=N; ++i){
+        pre[i] = (i==1) ? N : i-1;
+        nxt[i] = (i==N) ? 1 : i+1;
+        ++len;
     }
 
-    auto cur = l.begin();  // 리스트의 첫 번째 요소 가리킴
+    int i = 1;
+    for (int cur = 1; len !=0 ; cur = nxt[cur]){
+        if (i == K){ 
+            pre[nxt[cur]] = pre[cur];
+            nxt[pre[cur]] = nxt[cur];
+            v.push_back(cur);
+            i=1;
+            --len;
 
-    while (!l.empty()) {
-        // k-1번 이동 (k번째 요소 찾기 위해)
-        for (int i = 1; i < k; i++) {
-            cur++;
-            if (cur == l.end()) cur = l.begin();  // 리스트 끝이면 처음으로 이동
         }
-
-        // k번째 요소 삭제
-        ans.push_back(*cur);  // 삭제할 요소 저장
-        cur = l.erase(cur);   // 삭제 후 커서 이동
-
-        // 리스트의 마지막 원소를 삭제한 경우, 커서를 처음으로 이동
-        if (cur == l.end()) cur = l.begin();
+        else ++i;
     }
 
-    // 결과 출력 (형식 맞춤)
-    cout << '<';
-    for (int i = 0; i < ans.size(); i++) {
-        cout << ans[i];
-        if (i != ans.size() - 1) cout << ", ";
+    // 요세푸스 순열 출력
+    cout << "<";
+    for(size_t i = 0; i < v.size(); ++i) {
+        cout << v[i];
+        if(i != v.size() - 1) cout << ", ";
     }
-    cout << '>' << '\n';
+    cout << ">";
 
-    return 0;
 }
