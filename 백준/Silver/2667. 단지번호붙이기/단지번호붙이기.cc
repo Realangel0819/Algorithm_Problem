@@ -1,5 +1,6 @@
 #include<bits/stdc++.h>
 using namespace std;
+
 #define X first 
 #define Y second 
 
@@ -11,56 +12,50 @@ int dy[4] = {0,0,1,-1};
 
 int n;
 
-int bfs(int x,int y){
-    queue<pair<int,int>> q;
-    q.push({x,y});
-    visited[x][y] = 1;
+int dfs(int i,int j){
+    visited[i][j]=1;
+    int cnt =1;
+    for (int dir =0;dir<4;dir++){
+        int nx = i+dx[dir];
+        int ny = j+dy[dir];
 
-    int cnt = 1; // 여기서 시작
+        if(nx<0||ny<0||nx>=n||ny>=n) continue;
+        if(visited[nx][ny]||board[nx][ny]==0) continue;
 
-    while(!q.empty()){
-        auto cur = q.front(); q.pop();
-        for(int dir=0; dir<4; dir++){
-            int nx = cur.X + dx[dir];
-            int ny = cur.Y + dy[dir];
+        cnt+= dfs(nx,ny);
 
-            if(nx < 0 || nx >= n || ny < 0 || ny >= n) continue;
-            if(visited[nx][ny] || board[nx][ny] == 0) continue;
-
-            visited[nx][ny] = 1;
-            cnt++;
-            q.push({nx, ny});
-        }
     }
+
     return cnt;
 }
-
 int main(){
     ios::sync_with_stdio(0);
     cin.tie(0);
 
-    cin >> n;
-
     vector<int> v;
+    cin >>n;
 
     string s;
-    for(int i=0;i<n;i++){
+
+    for(int i = 0 ; i<n ;i++){
         cin >> s;
         for(int j=0;j<n;j++){
-            board[i][j] = s[j] - '0';
+            board[i][j] = s[j]-'0';
         }
     }
 
     for(int i=0;i<n;i++){
         for(int j=0;j<n;j++){
             if(board[i][j] == 1 && visited[i][j] == 0){
-                v.push_back(bfs(i,j));
+                v.push_back(dfs(i,j));
             }
         }
     }
 
-    sort(v.begin(), v.end());
+    sort(v.begin(),v.end());
 
     cout << v.size() << '\n';
-    for(int x : v) cout << x << '\n';
+    for(int x: v) cout << x <<'\n';
+
+
 }
